@@ -7,7 +7,7 @@
 
 ## Project Description
 
-Working in the finance industry, you may need to manually manipulate a bank NACHA file. I have written this script to enable you to do that. Currently in the early stage of life, this script will only recalculate a bank file with credits and debits after it has been manually manipulated.
+Working in the finance industry, you may need to manually manipulate a bank NACHA file. I have written this script to enable you to do that. Currently in the early stage of its life, this script will only recalculate a bank nacha file with credits and debits after it has been created or manipulated.
 
   
 

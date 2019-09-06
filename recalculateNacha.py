@@ -1,7 +1,8 @@
 import time
 
-oldNachaFile = open("testOldNacha.txt")
-newNachaFile = open("testNEWNacha.txt","w")
+oldNachaFile = open("OldNacha.txt")
+newNachaFile = open("NEWNacha.txt","w")
+
 """Only deal with Credits and Debits
 Batch Debits = 225
 Bach Credits = 220

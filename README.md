@@ -1,7 +1,7 @@
 
 # Python Nacha File Editor
 
-##### By Jacob Hershberger | Version 1.0
+##### By Jacob Hershberger | Version 1.1
 
   
 
@@ -41,3 +41,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+
+### Changelog
+ - 1.1 added routing number recalculation clause on the batch trailer. removed unneeded comments
+ - 1.0 Initial Release 

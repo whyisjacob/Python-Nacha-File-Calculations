@@ -97,67 +97,46 @@ for line in oldNachaFile:
     if line.startswith("82"):
         #Debits are from col 21-32
         batchDebitResultsOld = line[20:32:1]
-        # print(batchDebitResultsOld)
         batchDebitResultsNew = 000000000000
         batchDebitResultsNew += batchDebits
         batchDebitResultsNew = str(batchDebitResultsNew).zfill(12)
-        # print(batchDebitResultsNew)
 
         #credits are from 33-44
         batchCreditResultsOld = line[32:44:1]
-        # print(batchCreditResultsOld)
         batchCreditResultsNew = 000000000000
         batchCreditResultsNew += batchCredits
         batchCreditResultsNew = str(batchCreditResultsNew).zfill(12)
-        # print(batchCreditResultsNew)
 
         #update line counts
         lineCount = line[5:10:1]
         lineCount = 00000
         lineCount += inBatchCount
         lineCount = str(lineCount).zfill(5)
-        # print(line)
-        # print("lineCount")
-        # print(lineCount)
 
         #don't forget to adjust the amount
         lineBegin = line[0:5:1]
         lineAfterCount=line[10:20:1]
         lineEnd = line[44:]
-        # print(lineBegin)
-        # print(lineAfterCount)
-        # print(line)
         #Extradite these cols from the line and marry it with the new results
         
         
         batchRoutingTotal = 0
         rnum = 0
-        print('===')
+        # print('===')
         while rnum < len(batchRoutingTotalsArr):
             batchRoutingTotal += batchRoutingTotalsArr[rnum]
             # print(batchRoutingTotal)
             rnum +=1
-        print('batchRoutingTotal')
-        print(batchRoutingTotal)
         fileBatchRoutingTotalsArr.append(batchRoutingTotal)
+
         batchRoutingTotal = str(batchRoutingTotal).zfill(10)
+        if (len(batchRoutingTotal) > 10):
+            batchRoutingTotal = batchRoutingTotal[1:]
         batchRoutingTotal = str(batchRoutingTotal)
-        # lenCheck = len(str(batchRoutingTotal))
-        # lenCheck = int(lenCheck)
-        # print(lenCheck)
-        # if str(lenCheck) < '6':
-        # import math
-        # bartSimpson = (batchRoutingTotal * 1000) / 1000
-        # print(bartSimpson)
 
         #Dont forget the total DONE
         batchCreditTotalArr.append(batchCredits)
         batchDebitTotalArr.append(batchDebits)
-        # print("Credit")
-        # print(batchCreditTotal)
-        # print("Debit")
-        # print(batchDebitTotal)
-        # print(totalBatchCount)
         
         line=lineBegin + lineCount + batchRoutingTotal + batchDebitResultsNew + batchCreditResultsNew + lineEnd
         totalBatchCount +=1
@@ -166,10 +145,6 @@ for line in oldNachaFile:
     # Setup File Trailer
     #
     if line.startswith("90"):
-        # print(line)
-        # print(batchCreditTotalArr)
-        # print(batchDebitTotalArr)
-
 
         #File Debts
         fileBatchDebitResultsOld = line[31:43:1]
@@ -180,40 +155,28 @@ for line in oldNachaFile:
             # print(batchDebitTotalArr[d])
             batchDebitTotal += batchDebitTotalArr[d]
             d += 1
-        # print("New File debit Total:")
-        # print(batchDebitTotal)
         fileBatchDebitResultsNew = 000000000000
         fileBatchDebitResultsNew += batchDebitTotal
         fileBatchDebitResultsNew = str(fileBatchDebitResultsNew).zfill(12)
-        # print(fileBatchDebitResultsNew)
 
 
         #File Credits
         c = 0
         batchCreditTotal = 0
         while c < len(batchCreditTotalArr):
-            # print(batchCreditTotalArr[c])
             batchCreditTotal += batchCreditTotalArr[c]
             c += 1
-        # print("New File credit Total:")
-        # print(batchCreditTotal)
         fileBatchCreditResultsOld = line[43:55:1]
-        # print(fileBatchCreditResultsOld)
         fileBatchCreditResultsNew = 000000000000
         fileBatchCreditResultsNew += batchCreditTotal
         fileBatchCreditResultsNew = str(fileBatchCreditResultsNew).zfill(12)
-        # print(fileBatchCreditResultsNew)
 
 
         #update line counts
         FilebatchCount = line[2:7:1]
-        # print(FilebatchCount)
         FilebatchCount = 00000
         FilebatchCount += batchCount
         FilebatchCount = str(FilebatchCount).zfill(6)
-        # print(line)
-        # print("lineCount")
-        # print(FilebatchCount)
 
 
         #Update block Count 
@@ -225,14 +188,10 @@ for line in oldNachaFile:
         if isDivisible != 0:
             newLine9s = 10 - isDivisible
         blockCount += newLine9s
-        # print(isDivisible)
         fileBlockCount = line[8:13:1]
-        # print(fileBlockCount)
         fileBlockCount = 00000
         fileBlockCount += blockCount
         fileBlockCount = str(fileBlockCount).zfill(6)
-        # print(line)
-        # print("lineCount")
         print(fileBlockCount)
 
 
@@ -241,7 +200,6 @@ for line in oldNachaFile:
         fileEntryAddendaCount = str(fileEntryAddendaCount)
         fileEntryAddendaCount = str(fileEntryAddendaCount).zfill(8)
 
-        # print(fileEntryAddendaCount)
         rnum = 0
         #fileEntryHash = line[21:31:1]
         fileEntryHash = 0
@@ -259,15 +217,6 @@ for line in oldNachaFile:
             print('yes')
             fileEntryHash = fileEntryHash[1:]
         print(fileEntryHash)
-        # fileReserved = line
-        # fileLineBegin = line[0:5:1]
-        # fileLineAfterCount=line[10:20:1]
-        # fileLineEnd = line[44:]
-        # print(fileLineBegin)
-        # print(fileLineAfterCount)
-        # line=lineBegin + lineCount + lineAfterCount + batchDebitResultsNew + batchCreditResultsNew + fileLineEnd + "\n"
-        # print(line)
-        # print(line)
         line = '9' + FilebatchCount + fileBlockCount +fileEntryAddendaCount+ fileEntryHash + fileBatchDebitResultsNew + fileBatchCreditResultsNew + '\n'
         # print(line)
 
